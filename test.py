@@ -1,6 +1,8 @@
+import unittest
+
 print("Hello World!")
 
 #tests with pytest.py
 
-def test_always_passes():
-    assert True
+def inc(x):
+    assert inc(3) == 4
