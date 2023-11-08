@@ -1,6 +1,6 @@
 import unittest
-
-print("Hello World!")
+import os
+#print("Hello World!")
 
 #tests with pytest.py
 
@@ -9,3 +9,7 @@ def inc(x):
 
 def test_answer():
     assert inc(3) == 4
+
+
+# def test_1wc():
+#     pass

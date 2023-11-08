@@ -1,0 +1,5 @@
+Standard Input
+
+This is the Standard Input.
+
+Yes! This is the word count
