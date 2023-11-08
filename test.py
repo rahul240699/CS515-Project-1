@@ -5,4 +5,7 @@ print("Hello World!")
 #tests with pytest.py
 
 def inc(x):
-    assert inc(3) == 4
+    return x + 1
+
+def test_answer():
+    assert inc(3) == 1
