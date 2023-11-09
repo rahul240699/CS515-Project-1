@@ -11,7 +11,7 @@ def inc(x):
 def test_answer():
     assert inc(3) == 4
 
-test_dir = "/test"
+test_dir = "test"
 files = os.listdir(test_dir)
 
 
