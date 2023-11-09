@@ -18,7 +18,7 @@ files = os.listdir(test_dir)
 def test_1wc():
     input_files = [f for f in files if f.endswith(".in")]
     for i in input_files:
-        result = subprocess.run(["python", "/prog/wc.py", test_dir+"/"+i], stdout=subprocess.PIPE, text = True) 
+        result = subprocess.run(["python", "prog/wc.py", test_dir+"/"+i], stdout=subprocess.PIPE, text = True) 
         output = result.stdout
         output_file = i[:-2] + "out"
         if os.path.isfile(test_dir+"/"+output_file):
