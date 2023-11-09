@@ -30,7 +30,7 @@ def main():
             print(args.filename+": No such file or directory")
         else:
             lines, words, chars = word_count_file(filename = args.filename)
-            print(f"{lines}\t{words}\t{chars}\t{args.filename}")
+            print(f"{lines} {words} {chars} {args.filename}")
 
 if __name__ == "__main__":
     main()
