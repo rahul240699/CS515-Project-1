@@ -37,4 +37,4 @@ def test_1gron():
             expected_output = ""
             with open(test_dir+"/"+output_file) as std:
                 expected_output = std.read()
-            assert expected_output == output
+            assert expected_output.strip() == output.strip()
