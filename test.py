@@ -26,3 +26,15 @@ def test_1wc():
             with open(test_dir+"/"+output_file) as std:
                 expected_output = std.read()
             assert expected_output.strip() == output.strip()
+
+def test_1gron():
+    input_files = [f for f in files if f.endswith(".in") and "GRON" in f]
+    for i in input_files:
+        result = subprocess.run(["python", "prog/gron.py", test_dir+"/"+i], stdout=subprocess.PIPE, text = True) 
+        output = result.stdout
+        output_file = i[:-2] + "out"
+        if os.path.isfile(test_dir+"/"+output_file):
+            expected_output = ""
+            with open(test_dir+"/"+output_file) as std:
+                expected_output = std.read()
+            assert expected_output == output
