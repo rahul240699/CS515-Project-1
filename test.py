@@ -16,7 +16,7 @@ files = os.listdir(test_dir)
 
 
 def test_1wc():
-    input_files = [f for f in files if f.endswith(".in")]
+    input_files = [f for f in files if f.endswith(".in") and "WC" in f]
     for i in input_files:
         result = subprocess.run(["python", "prog/wc.py", test_dir+"/"+i], stdout=subprocess.PIPE, text = True) 
         output = result.stdout
