@@ -12,6 +12,8 @@ def gron(data, parent = "", open_dict = True, open_list = True, obj = "json"):
             new_parent = f"{parent}.{k}" if parent else k
             gron(v, new_parent, isinstance(v, dict), isinstance(v,list), obj)
     elif isinstance(data, list):
+        if not parent:
+            print(f"{obj} = []")
         if open_list:
             print(f"{obj}.{parent} = []")
         for i, item in enumerate(data):
