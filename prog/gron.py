@@ -25,7 +25,7 @@ def gron(data, parent = "", open_dict = True, open_list = True, obj = "json"):
 
 
 def main():
-    parser = argparse.ArgumentParser(prog = "Gron Functionality", description = "Flattens JSON.")
+    parser = argparse.ArgumentParser(prog = "gron", description = "Flattens JSON.")
 
     parser.add_argument("filename", type = str, help = "Enter the name of the file.")
     parser.add_argument("--obj", type= str, default="json", help="Print out a different name of the Object")

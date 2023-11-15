@@ -2,6 +2,7 @@ import argparse
 import subprocess
 import os
 import sys
+import io
 
 def word_count_file(filename):
     with open(filename, "r") as file:
@@ -18,10 +19,10 @@ def word_count_file(filename):
 
 
 def main():
-    parser = argparse.ArgumentParser(prog= "Word Count Functionality", description= "Returns the count of words of the given input.")
+    parser = argparse.ArgumentParser(prog= "wc", description= "Returns the count of words of the given input.")
     #parser.print_help()
 
-    parser.add_argument("filenames", type = str, nargs = "+", help = "Enter the name of the file")
+    parser.add_argument("filenames", type = str, nargs = "*", help = "Enter the name of the file", default=str(sys.stdin))
     parser.add_argument("-l", "--lines", action = "store_true", help = "Count only the total number of lines.")
     parser.add_argument("-w", "--words", action = "store_true", help = "Count only the total number of words.")
     parser.add_argument("-c", "--characters", action = "store_true", help = "Count only the total number of characters.")
@@ -30,11 +31,17 @@ def main():
     total_words = 0
     total_chars = 0
 
+    file = ""
+
+
     args = parser.parse_args()
-    for filename in args.filenames:
+
+    file = args.filenames
+
+    for filename in file:
         try:
             if not os.path.isfile(filename):
-                raise ValueError(filename+": No such file or directory")
+                raise ValueError(filename+" : No such file or directory")
             else:
                 lines, words, chars = word_count_file(filename = filename)
                 
@@ -56,6 +63,7 @@ def main():
                     print(f"{chars} {filename}")
                 else:
                     print(f"{lines} {words} {chars} {filename}")
+                sys.exit(0)
         except Exception as e:
             print(e)
             sys.exit(1)
