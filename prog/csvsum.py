@@ -6,7 +6,7 @@ import pandas as pd
 
 
 
-def sum_csv(filename, columns="", scr = False, col_range = None):
+def sum_csv(filename, columns = "", scr = False, col_range = None):
     try:
         df = pd.read_csv(filename)
 
