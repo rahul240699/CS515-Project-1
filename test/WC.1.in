@@ -1,5 +1,1 @@
-Standard Input
-
-This is the Standard Input.
-
-Yes! This is the word count
+python prog/wc.py std_in.txt
