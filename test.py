@@ -37,8 +37,8 @@ def test_1wc():
         if os.path.isfile(test_dir+"/"+status_file):
             expected_exit_code = ""
             with open(test_dir+"/"+status_file) as ste:
-                expected_exit_code = ste.read()
-            assert expected_exit_code.strip() == exit_code.strip()
+                expected_exit_code = int(ste.read())
+            assert expected_exit_code == exit_code
 
 def test_1gron():
     input_files = [f for f in files if f.endswith(".in") and "GRON" in f]
