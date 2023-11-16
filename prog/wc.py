@@ -63,13 +63,17 @@ def main():
                     print(f"{chars} {filename}")
                 else:
                     print(f"{lines} {words} {chars} {filename}")
-                sys.exit(0)
         except Exception as e:
-            print(e)
+            sys.stderr.write(f"Error: {e}")
             sys.exit(1)
+    try:
+        if len(args.filenames) > 1:
+            print(f"{total_lines} {total_words} {total_chars} total")
+    except Exception as e:
+        sys.stderr.write(f"Error: {e}")
+        sys.exit(1)
     
-    if len(args.filenames) > 1:
-        print(f"{total_lines} {total_words} {total_chars} total")
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()

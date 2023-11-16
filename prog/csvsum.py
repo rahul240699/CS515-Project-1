@@ -11,8 +11,8 @@ def sum_csv(filename, columns="", scr = False, col_range = None):
         df = pd.read_csv(filename)
 
         if not (col_range == None):
-            start, end = map(str.strip, col_range.split(':'))
-            selected_columns = df.columns[int(start):int(end)]
+            start, end = map(str.strip, col_range.split(':'))   
+            selected_columns = df.columns[int(start):int(end)+1]
         else:
             selected_columns = columns
 
@@ -26,10 +26,11 @@ def sum_csv(filename, columns="", scr = False, col_range = None):
             res = df[selected_columns].sum()
 
         print(res)
-
     except Exception as e:
         print(e)
         sys.exit(1)
+    
+    sys.exit(0)
 
 def main():
     parser = argparse.ArgumentParser(prog= "csvsum", description= "Returns the sum of given columns of a csv file.")

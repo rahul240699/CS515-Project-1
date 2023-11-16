@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sys
 
 def gron(data, parent = "", open_dict = True, open_list = True, obj = "json"):
     if isinstance(data, dict):
@@ -33,10 +34,15 @@ def main():
 
     args = parser.parse_args()
     # print(args.obj)
+    try:
+        f = open(args.filename)
+        data = json.load(f)
+        gron(data, obj = args.obj)
+    except Exception as e:
+        sys.stderr.write(f"Error: {e}")
+        sys.exit(1)
     
-    f = open(args.filename)
-    data = json.load(f)
-    gron(data, obj = args.obj)
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
