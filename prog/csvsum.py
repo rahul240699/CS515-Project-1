@@ -24,7 +24,7 @@ def sum_csv(filename, columns = "", scr = False, col_range = None):
             res = df[selected_columns].sum(axis = 1)
         else:
             res = df[selected_columns].sum()
-
+        
         print(res)
     except Exception as e:
         print(e)
