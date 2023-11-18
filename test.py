@@ -1,4 +1,4 @@
-import unittest
+import sys
 import os
 import subprocess
 
@@ -21,7 +21,7 @@ def run_test(program, test_name):
     try:
         
         # print("The name of the program:" +program)
-        process = subprocess.run(["python prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
+        process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
 
         output = process.stdout
         print("This is the output:"+output)
@@ -36,11 +36,8 @@ def run_test(program, test_name):
         if os.path.exists(args_file):
             with open(args_file, "r") as file:
                 args = file.read().split()
-            process_args = [f"python prog/{program}.py"] + args
-            process = subprocess.run(process_args,
-                stdout = subprocess.PIPE,stderr = subprocess.PIPE,
-                text=True
-            )
+            process_args = [f"python3 prog/{program}.py"] + args
+            process = subprocess.run(process_args, capture_output= True, shell= True, text=True)
 
            
             if os.path.exists(arg_expected_output_file):
@@ -89,5 +86,5 @@ if __name__ == "__main__":
     programs = ["wc", "gron"]
 
     for program in programs:
-        print(f"\nRunning tests for {program}...\n")
+        print(f"\nRunning tests for {program}\n")
         run_tests(program)
