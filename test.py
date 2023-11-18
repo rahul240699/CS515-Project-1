@@ -5,16 +5,101 @@ import subprocess
 
 #tests with pytest.py
 
-def inc(x):
-    return x + 1
+# def inc(x):
+#     return x + 1
 
-def test_answer():
-    assert inc(3) == 4
+# def test_answer():
+#     assert inc(3) == 4
 
-test_dir = "test"
-files = os.listdir(test_dir)
+class TestResult(Exception):
+    pass
 
+class OutputMismatch(TestResult):
+    pass
 
+class NonZeroExitStatus(TestResult):
+    pass
+
+def run_test(program, test_name):
+    input_file = f"test/{program}.{test_name}.in"
+    expected_output_file = f"test/{program}.{test_name}.out"
+    arg_expected_output_file = f"test/{program}.{test_name}.arg.out"
+    args_file = f"test/{test_name}.args"
+
+    try:
+        
+        process = subprocess.run(
+            [f"python {program}.py < {input_file}"],
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+
+        
+        if os.path.exists(expected_output_file):
+            with open(expected_output_file, "r") as file:
+                expected_output = file.read()
+            if process.stdout.strip() != expected_output.strip():
+                raise TestResult.OutputMismatch
+
+       
+        if os.path.exists(args_file):
+            with open(args_file, "r") as file:
+                args = file.read().split()
+            process_args = [f"python {program}.py"] + args
+            process = subprocess.run(
+                process_args,
+                capture_output=True,
+                text=True
+            )
+
+           
+            if os.path.exists(arg_expected_output_file):
+                with open(arg_expected_output_file, "r") as file:
+                    expected_output = file.read()
+                if process.stdout.strip() != expected_output.strip():
+                    raise TestResult.OutputMismatch
+
+        
+        if process.returncode != 0:
+            raise TestResult.NonZeroExitStatus
+
+        return True
+
+    except TestResult.OutputMismatch:
+        print(f"FAIL: {program} {test_name} failed ({TestResult.OutputMismatch})")
+        print("      expected:")
+        print(open(expected_output_file).read())
+        print("\n           got:")
+        print(process.stdout.strip())
+        return False
+
+    except TestResult.NonZeroExitStatus:
+        print(f"FAIL: {program} {test_name} failed ({TestResult.NonZeroExitStatus})")
+        return False
+
+def run_tests(program):
+    test_count = 0
+    pass_count = 0
+    
+    for test_file in os.listdir("test"):
+        if test_file.endswith(f"{program}.in"):
+            test_name = test_file.replace(f"{program}.", "").replace(".in", "")
+            print(test_name)
+            test_count += 1
+            if run_test(program, test_name):
+                pass_count += 1
+
+    print("\nOK:", pass_count)
+    print("output mismatch:", test_count - pass_count)
+    print("total:", test_count)
+
+if __name__ == "__main__":
+    programs = ["wc", "gron"]
+
+    for program in programs:
+        print(f"\nRunning tests for {program}...\n")
+        run_tests(program)
 
 
 # def test_wc():
