@@ -29,9 +29,8 @@ def run_test(program, test_name):
     try:
         
         process = subprocess.run(
-            [f"python {program}.py < {input_file}"],
-            shell=True,
-            capture_output=True,
+            [f"python prog/{program}.py < {input_file}"],
+            stdout = subprocess.PIPE,stderr = subprocess.PIPE,
             text=True
         )
 
@@ -40,16 +39,15 @@ def run_test(program, test_name):
             with open(expected_output_file, "r") as file:
                 expected_output = file.read()
             if process.stdout.strip() != expected_output.strip():
-                raise TestResult.OutputMismatch
+                raise OutputMismatch
 
        
         if os.path.exists(args_file):
             with open(args_file, "r") as file:
                 args = file.read().split()
-            process_args = [f"python {program}.py"] + args
+            process_args = [f"python prog/{program}.py"] + args
             process = subprocess.run(
-                process_args,
-                capture_output=True,
+                stdout = subprocess.PIPE,stderr = subprocess.PIPE,
                 text=True
             )
 
@@ -58,24 +56,24 @@ def run_test(program, test_name):
                 with open(arg_expected_output_file, "r") as file:
                     expected_output = file.read()
                 if process.stdout.strip() != expected_output.strip():
-                    raise TestResult.OutputMismatch
+                    raise OutputMismatch
 
         
         if process.returncode != 0:
-            raise TestResult.NonZeroExitStatus
+            raise NonZeroExitStatus
 
         return True
 
-    except TestResult.OutputMismatch:
-        print(f"FAIL: {program} {test_name} failed ({TestResult.OutputMismatch})")
+    except OutputMismatch:
+        print(f"FAIL: {program} {test_name} failed ({OutputMismatch})")
         print("      expected:")
         print(open(expected_output_file).read())
         print("\n           got:")
         print(process.stdout.strip())
         return False
 
-    except TestResult.NonZeroExitStatus:
-        print(f"FAIL: {program} {test_name} failed ({TestResult.NonZeroExitStatus})")
+    except NonZeroExitStatus:
+        print(f"FAIL: {program} {test_name} failed ({NonZeroExitStatus})")
         return False
 
 def run_tests(program):
@@ -83,9 +81,11 @@ def run_tests(program):
     pass_count = 0
     
     for test_file in os.listdir("test"):
-        if test_file.endswith(f"{program}.in"):
+        #print(test_file)
+        if test_file.endswith(f".in"):
+            #print(test_file)
             test_name = test_file.replace(f"{program}.", "").replace(".in", "")
-            print(test_name)
+            #print(test_name)
             test_count += 1
             if run_test(program, test_name):
                 pass_count += 1
