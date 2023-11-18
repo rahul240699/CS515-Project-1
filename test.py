@@ -29,7 +29,7 @@ def run_test(program, test_name):
     try:
         
         # print("The name of the program:" +program)
-        process = subprocess.run(["python prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
+        process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
 
         output = process.stdout
         # print("This is the output:"+output)
@@ -44,7 +44,7 @@ def run_test(program, test_name):
         if os.path.exists(args_file):
             with open(args_file, "r") as file:
                 args = file.read().split()
-            process_args = [f"python prog/{program}.py"] + args
+            process_args = [f"python3 prog/{program}.py"] + args
             process = subprocess.run(
                 stdout = subprocess.PIPE,stderr = subprocess.PIPE,
                 text=True
