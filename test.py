@@ -28,11 +28,11 @@ def run_test(program, test_name):
 
     try:
         
-        print("The name of the program:" +program)
-        process = subprocess.run(["python3 prog/"+program+".py "+ input_file],capture_output= True, shell= True, text=True)
+        # print("The name of the program:" +program)
+        process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
 
         output = process.stdout
-        print("This is the output:"+output)
+        # print("This is the output:"+output)
 
         if os.path.exists(expected_output_file):
             with open(expected_output_file, "r") as file:
@@ -83,7 +83,7 @@ def run_tests(program):
         #print(test_file)
         if test_file.endswith(f".in") and program in test_file:
             print(test_file)
-            test_name = test_file.replace(f"{program}.", "").replace(".in", "")
+            test_name = test_file.split(".")[1]
             print(test_name)
             test_count += 1
             if run_test(program, test_name):
