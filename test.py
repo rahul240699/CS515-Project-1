@@ -32,7 +32,7 @@ def run_test(program, test_name):
         process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
 
         output = process.stdout
-        # print("This is the output:"+output)
+        print("This is the output:"+output)
 
         if os.path.exists(expected_output_file):
             with open(expected_output_file, "r") as file:
