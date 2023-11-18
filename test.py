@@ -15,7 +15,7 @@ test_dir = "test"
 files = os.listdir(test_dir)
 
 
-def test_1wc():
+def test_wc():
     input_files = [f for f in files if f.endswith(".in") and "WC" in f]
     for i in input_files:
         with open(test_dir+"/"+i, "r") as test:
@@ -40,7 +40,7 @@ def test_1wc():
                 expected_exit_code = int(ste.read())
             assert expected_exit_code == exit_code
 
-def test_1gron():
+def test_gron():
     input_files = [f for f in files if f.endswith(".in") and "GRON" in f]
     for i in input_files:
         with open(test_dir+"/"+i, "r") as test:
@@ -64,7 +64,7 @@ def test_1gron():
                 expected_exit_code = int(ste.read())
             assert expected_exit_code == exit_code
 
-def test_1CSV():
+def test_CSV():
     input_files = [f for f in files if f.endswith(".in") and "CSV" in f]
     for i in input_files:
         with open(test_dir+"/"+i, "r") as test:
