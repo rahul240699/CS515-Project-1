@@ -28,7 +28,7 @@ def gron(data, parent = "", open_dict = True, open_list = True, obj = "json"):
 def main():
     parser = argparse.ArgumentParser(prog = "gron", description = "Flattens JSON.")
 
-    parser.add_argument("filename", type = str, nargs = "*", help = "Enter the name of the file.")
+    parser.add_argument("filename", type = str, nargs= "?", help = "Enter the name of the file.")
     parser.add_argument("--obj", type= str, default="json", help="Print out a different name of the Object")
     
 
@@ -39,9 +39,12 @@ def main():
             f = sys.stdin
         else:
             f = open(args.filename)
+        # print(f)
         data = json.load(f)
+        # print(data)
         gron(data, obj = args.obj)
     except Exception as e:
+        # print(e)
         sys.stderr.write(f"Error: {e}")
         sys.exit(1)
     
