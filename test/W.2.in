@@ -1,1 +1,0 @@
-cat std_in.txt | python prog/wc.py
