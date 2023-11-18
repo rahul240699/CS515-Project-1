@@ -21,7 +21,7 @@ def test_wc():
         with open(test_dir+"/"+i, "r") as test:
             command = test.readline().strip().split(" ")
 
-        result = subprocess.run(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE, text = True) 
+        result = subprocess.run(command, shell= True,stdout = subprocess.PIPE, stderr = subprocess.PIPE, text = True) 
         output = result.stdout
         error = result.stderr
         exit_code = result.returncode
@@ -45,7 +45,7 @@ def test_gron():
     for i in input_files:
         with open(test_dir+"/"+i, "r") as test:
             command = test.readline().strip().split(" ")
-        result = subprocess.run(command, stdout = subprocess.PIPE,stderr = subprocess.PIPE, text = True) 
+        result = subprocess.run(command, shell = True,stdout = subprocess.PIPE,stderr = subprocess.PIPE, text = True) 
         output = result.stdout
         error = result.stderr
         exit_code = result.returncode
@@ -69,7 +69,7 @@ def test_CSV():
     for i in input_files:
         with open(test_dir+"/"+i, "r") as test:
             command = test.readline().strip().split(" ")
-        result = subprocess.run(command, stdout = subprocess.PIPE,stderr = subprocess.PIPE, text = True) 
+        result = subprocess.run(command, shell = True, stdout = subprocess.PIPE,stderr = subprocess.PIPE, text = True) 
         output = result.stdout
         error = result.stderr
         exit_code = result.returncode
