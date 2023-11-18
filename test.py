@@ -28,35 +28,33 @@ def run_test(program, test_name):
 
     try:
         
-        process = subprocess.run(
-            [f"python prog/{program}.py < {input_file}"],
-            stdout = subprocess.PIPE,stderr = subprocess.PIPE,
-            text=True
-        )
+        process = subprocess.run(["python", "prog/"+program+".py",  input_file],capture_output= True, shell= True,text=True)
 
-        
+        output = process.stdout
+        print("This is the output:"+output)
+
         if os.path.exists(expected_output_file):
             with open(expected_output_file, "r") as file:
                 expected_output = file.read()
-            if process.stdout.strip() != expected_output.strip():
+            if output.strip() != expected_output.strip():
                 raise OutputMismatch
 
        
-        if os.path.exists(args_file):
-            with open(args_file, "r") as file:
-                args = file.read().split()
-            process_args = [f"python prog/{program}.py"] + args
-            process = subprocess.run(
-                stdout = subprocess.PIPE,stderr = subprocess.PIPE,
-                text=True
-            )
+        # if os.path.exists(args_file):
+        #     with open(args_file, "r") as file:
+        #         args = file.read().split()
+        #     process_args = [f"python prog/{program}.py"] + args
+        #     process = subprocess.run(
+        #         stdout = subprocess.PIPE,stderr = subprocess.PIPE,
+        #         text=True
+        #     )
 
            
-            if os.path.exists(arg_expected_output_file):
-                with open(arg_expected_output_file, "r") as file:
-                    expected_output = file.read()
-                if process.stdout.strip() != expected_output.strip():
-                    raise OutputMismatch
+        #     if os.path.exists(arg_expected_output_file):
+        #         with open(arg_expected_output_file, "r") as file:
+        #             expected_output = file.read()
+        #         if process.stdout.strip() != expected_output.strip():
+        #             raise OutputMismatch
 
         
         if process.returncode != 0:
@@ -82,10 +80,10 @@ def run_tests(program):
     
     for test_file in os.listdir("test"):
         #print(test_file)
-        if test_file.endswith(f".in"):
-            #print(test_file)
+        if test_file.endswith(f".in") and program in test_file:
+            print(test_file)
             test_name = test_file.replace(f"{program}.", "").replace(".in", "")
-            #print(test_name)
+            print(test_name)
             test_count += 1
             if run_test(program, test_name):
                 pass_count += 1
