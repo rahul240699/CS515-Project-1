@@ -22,7 +22,7 @@ def run_test(program, test_name):
         
         # print("The name of the program:" +program)
         #process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
-        process = subprocess.run(["python prog/"+program+".py "+ input_file], stdin=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process = subprocess.run(["python", "prog/"+program+".py ",input_file], stdin=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         output = process.stdout
         print("This is the output:"+output)
