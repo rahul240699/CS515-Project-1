@@ -24,9 +24,10 @@ I spent around 9 hours approximately on the project.
 
 ## Extensions Implemented
 1. **More advanced wc: Multple Files** : I have implemented the extension for wc where one can input multiple files and get the total count of characters, words, and lines. The following example shows the sample input and output for this.
-'''
+
+```
 $ python prog/wc.py file1.txt file2.txt
 1       1       6 file1.txt
 1       1      16 file2.txt
 2       2      22 total
-'''
+```
