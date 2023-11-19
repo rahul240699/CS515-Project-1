@@ -6,7 +6,7 @@ Rahul Sohandani rsohanda@stevens.edu
 [Github Repository](https://github.com/rahul240699/CS515-Project-1)
 
 ## Estimation of Hours Spent on the project
-1. I spent around 11 hours approximately on the project.
+I spent around 8 hours approximately on the project.
 
 ## Testing of the code
 1. Initially I started the testing on my PC's terminal.
