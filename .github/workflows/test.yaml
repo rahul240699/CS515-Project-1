@@ -23,8 +23,8 @@ jobs:
         python-version: "3.11.5"
     - name: Install dependencies
       run: |
-        python3 -m pip install --upgrade pip
-        pip3 install flake8 pytest
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -34,4 +34,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with test harness
       run: |
-        python3 test.py
+        python test.py
