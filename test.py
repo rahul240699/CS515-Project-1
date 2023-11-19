@@ -25,7 +25,7 @@ def run_test(program, test_name):
         process = subprocess.run(["python", "prog/"+program+".py ",input_file], stdin=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         output = process.stdout
-        print("This is the output:"+output)
+        # print("This is the output:"+output)
 
         if os.path.exists(expected_output_file):
             with open(expected_output_file, "r") as file:
