@@ -61,9 +61,9 @@ def run_test(program, test_name):
 
     except OutputMismatch:
         print(f"FAIL: {program} {test_name} failed ({OutputMismatch})")
-        print("      expected:")
+        print("expected:")
         print(open(expected_output_file).read())
-        print("\n           got:")
+        print("\ngot:")
         print(process.stdout.strip())
         return False
 

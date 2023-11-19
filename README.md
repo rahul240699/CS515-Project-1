@@ -6,7 +6,7 @@ Rahul Sohandani rsohanda@stevens.edu
 [Github Repository](https://github.com/rahul240699/CS515-Project-1)
 
 ## Estimation of Hours Spent on the project
-I spent around 8 hours approximately on the project.
+I spent around 9 hours approximately on the project.
 
 ## Testing of the code
 1. Initially I started the testing on my PC's terminal.
@@ -18,4 +18,15 @@ I spent around 8 hours approximately on the project.
 
 
 
-## Examples of difficult bugs resolved.
+## Examples of difficult bugs resolved
+1. I was facing an issue with taking input from stdin initially, however I could resolve that by adding **sys.stdin.isatty()**, which returns true if the input is from command line and false if it from stdin, this allowed me to add separate conditions for both the cases.
+2. I was unable to get the execution to stop at one condition and also capture errors, this was resolved by Exception Handling and using **sys.exit()** statements.
+
+## Extensions Implemented
+1. **More advanced wc: Multple Files** : I have implemented the extension for wc where one can input multiple files and get the total count of characters, words, and lines. The following example shows the sample input and output for this.
+'''
+$ python prog/wc.py file1.txt file2.txt
+1       1       6 file1.txt
+1       1      16 file2.txt
+2       2      22 total
+'''
