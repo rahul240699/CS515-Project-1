@@ -50,7 +50,7 @@ def run_test(program, test_name):
             if os.path.exists(arg_expected_output_file):
                 with open(arg_expected_output_file, "r") as file:
                     expected_output = file.read()
-                if process.stdout.strip() != expected_output.strip():
+                if process.strip() != expected_output.strip():
                     raise OutputMismatch
 
         
@@ -64,7 +64,7 @@ def run_test(program, test_name):
         print("expected:")
         print(open(expected_output_file).read())
         print("\ngot:")
-        print(process.stdout.strip())
+        print(process.strip())
         return False
 
     except NonZeroExitStatus:
