@@ -31,3 +31,31 @@ $ python prog/wc.py file1.txt file2.txt
 1       1      16 file2.txt
 2       2      22 total
 ```
+
+2. **More advanced wc: Flags to control output**: I have implemented wc flags **-l**, **-w** and **-c**, to control output. The following example shows sample input and the sample output for this.
+```
+$ python prog/wc.py test/wc.basic.in -l -w
+7 412 test/wc.basic.in
+$ python prog/wc.py test/wc.basic.in -c
+2620 test/wc.basic.in
+```
+
+3. **Extension: More advanced gron: control the base-object name** : I have implemented the extension to control the main object name for gron. The following shows sample input and the sample output for the same.
+```
+$ python prog/gron.py --obj o gron.basic.in 
+o = {};
+o.menu = {};
+o.menu.id = "file"
+o.menu.value = "File"
+o.menu.popup = {};
+o.menu.popup.menuitem = [];
+o.menu.popup.menuitem[0] = {};
+o.menu.popup.menuitem[0].value = "New"
+o.menu.popup.menuitem[0].onclick = "CreateNewDoc()"
+o.menu.popup.menuitem[1] = {};
+o.menu.popup.menuitem[1].value = "Open"
+o.menu.popup.menuitem[1].onclick = "OpenDoc()"
+o.menu.popup.menuitem[2] = {};
+o.menu.popup.menuitem[2].value = "Close"
+o.menu.popup.menuitem[2].onclick = "CloseDoc()"
+```
