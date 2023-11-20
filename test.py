@@ -25,7 +25,12 @@ def run_test(program, test_name):
         
         # process = subprocess.check_output(["python3", "prog/"+program+".py", input_file], universal_newlines=True)
 
-        process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
+        with open(input_file, "r") as file:
+            command = file.read()
+
+        process = subprocess.run([command], capture_output= True, shell= True, text=True)
+
+        # process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
 
 
         output = process.stdout
@@ -92,69 +97,11 @@ def run_tests(program):
     print("Output mismatch:", test_count - pass_count)
     print("total:", test_count)
 
-def run_test_csv(program, test_name):
-    input_file = f"test/{program}.{test_name}.in"
-    expected_output_file = f"test/{program}.{test_name}.out"
-    arg_expected_output_file = f"test/{program}.{test_name}.arg.out"
-    args_file = f"test/{program}.{test_name}.args"
-
-    try:
-        
-        with open(input_file, "r") as file:
-            command = file.read()
-
-        process = subprocess.run([command], capture_output= True, shell= True, text=True)
-
-
-        output = process.stdout
-        # print("This is the output:"+output)
-
-        if os.path.exists(expected_output_file):
-            with open(expected_output_file, "r") as file:
-                expected_output = file.read()
-            if output.strip() != expected_output.strip():
-                raise OutputMismatch
-
-        if process.returncode != 0:
-            raise NonZeroExitStatus
-
-        return True
-
-    except OutputMismatch:
-        print(f"FAIL: {program} {test_name} failed ({OutputMismatch})")
-        print("expected:")
-        print(open(expected_output_file).read())
-        print("\ngot:")
-        print(process.stdout.strip())
-        return False
-
-    except NonZeroExitStatus:
-        print(f"FAIL: {program} {test_name} failed ({NonZeroExitStatus})")
-        return False
-
-def run_csv_tests():
-    test_count = 0
-    pass_count = 0
-    print(f"\nRunning tests for csvsum\n")
-    for test_file in os.listdir("test"):
-        #print(test_file)
-        if test_file.endswith(f".in") and "csvsum" in test_file:
-            # print(test_file)
-            test_name = test_file.split(".")[1]
-            # print(test_name)
-            test_count += 1
-            if run_test_csv("csvsum", test_name):
-                pass_count += 1
-
-    print("\nOK:", pass_count)
-    print("Output mismatch:", test_count - pass_count)
-    print("total:", test_count)
         
 
 if __name__ == "__main__":
-    programs = ["wc", "gron"]
+    programs = ["wc", "gron", "csvsum"]
 
     for program in programs:
         print(f"\nRunning tests for {program}\n")
         run_tests(program)
-    run_csv_tests()
