@@ -1,0 +1,1 @@
+python3 prog/csvsum.py grades.csv --col_range 3:5

@@ -1,0 +1,1 @@
+python3 prog/csvsum.py salary_data.csv YearsExperience Salary -s
