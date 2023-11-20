@@ -21,12 +21,12 @@ def run_test(program, test_name):
     try:
         
         # print("The name of the program:" +program)
-        process = subprocess.run(["python3 prog/"+program+".py "+ input_file], capture_output= True, shell= True, text=True)
-
+        process = subprocess.check_output(["python3", "prog/"+program+".py", input_file], universal_newlines=True)
+        
         # process = subprocess.Popen(["python3", "prog/"+program+".py", input_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         # process = subprocess.run(["python3", "prog/"+program+".py ",input_file], stdin=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-        output = process.stdout
+        output = process
         # print("This is the output:"+output)
 
         if os.path.exists(expected_output_file):
@@ -39,10 +39,10 @@ def run_test(program, test_name):
         if os.path.exists(args_file):
             with open(args_file, "r") as file:
                 args = file.read().split(" ")
-            process_args = [f"python prog/{program}.py " +input_file]
-            for i in args:
-                process_args[0] += " "+i
-            # process = subprocess.run(process_args, capture_output= True, shell= True, text=True)
+            process_args = ["python3","prog/"+program+".py", input_file] + args
+            # for i in args:
+            #     process_args[0] += " "+i
+            process = subprocess.check_output(process_args, universal_newlines=True)
             
 
             # print("The output:" + process.stdout.strip()+ " The INPUT: "+ str(process_args))
@@ -54,8 +54,8 @@ def run_test(program, test_name):
                     raise OutputMismatch
 
         
-        if process.returncode != 0:
-            raise NonZeroExitStatus
+        # if process.returncode != 0:
+        #     raise NonZeroExitStatus
 
         return True
 
