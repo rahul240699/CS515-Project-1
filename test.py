@@ -68,7 +68,7 @@ def run_test(program, test_name):
         print("expected:")
         print(open(expected_output_file).read())
         print("\ngot:")
-        print(process.strip())
+        print(process.stdout.strip())
         return False
 
     except NonZeroExitStatus:
