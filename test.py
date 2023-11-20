@@ -43,7 +43,7 @@ def run_test(program, test_name):
             for i in args:
                 process_args[0] += " "+i
             # process = subprocess.run(process_args, capture_output= True, shell= True, text=True)
-            # process = subprocess.run(process_args, stdin=subprocess.PIPE, stderr=subprocess.PIPE, shell= True, text=True)
+            
 
             # print("The output:" + process.stdout.strip()+ " The INPUT: "+ str(process_args))
            
