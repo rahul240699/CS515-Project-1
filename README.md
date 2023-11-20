@@ -60,7 +60,7 @@ o.menu.popup.menuitem[2] = {};
 o.menu.popup.menuitem[2].value = "Close"
 o.menu.popup.menuitem[2].onclick = "CloseDoc()"
 ```
-## Program 3
+## Program 3: csvsum
 For my Program 3 I have implemented the csvsum functionality, which takes input the name of the columns and returns the sum of the columns. The following example highlights the working of csvsum functionality.
 ```
 $ python3 prog/csvsum.py salary_data.csv YearsExperience, Salary
